@@ -10,6 +10,12 @@ defmodule PhoenixFlopPets.Pets.Pet do
     timestamps(type: :utc_datetime)
   end
 
+  @derive {
+    Flop.Schema,
+    filterable: [:name, :species],
+    sortable: [:name, :age, :species]
+  }
+
   @doc false
   def changeset(pet, attrs) do
     pet
