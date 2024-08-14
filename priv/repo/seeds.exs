@@ -9,8 +9,8 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Karma", age: 5})
-PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Billie", age: 4})
-PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Milo", age: 3})
-PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Nelson", age: 2})
-PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Ruby", age: 1})
+PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Karma", age: 5, species: "dog"})
+PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Billie", age: 4, species: "dog"})
+PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Milo", age: 3, species: "dog"})
+PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Nelson", age: 2, species: "dog"})
+PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Ruby", age: 1, species: "dog"})
