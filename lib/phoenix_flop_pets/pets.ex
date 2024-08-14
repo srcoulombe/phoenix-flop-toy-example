@@ -21,6 +21,10 @@ defmodule PhoenixFlopPets.Pets do
     Repo.all(Pet)
   end
 
+  def list_pets(params) do
+    Flop.validate_and_run(Pet, params, for: Pet)
+  end
+
   @doc """
   Gets a single pet.
 
