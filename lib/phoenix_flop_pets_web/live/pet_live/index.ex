@@ -11,7 +11,13 @@ defmodule PhoenixFlopPetsWeb.PetLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+    case Pets.list_pets(params) do
+      {:ok, {pets, meta}} ->
+        {:noreply, assign(socket, %{pets: pets, meta: meta})}
+
+      {:error, _meta} ->
+        {:noreply, push_navigate(socket, to: ~p"/pets")}
+    end
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
