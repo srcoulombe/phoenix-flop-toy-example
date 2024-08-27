@@ -14,3 +14,5 @@ PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Billie", age: 4, s
 PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Milo", age: 3, species: "dog"})
 PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Nelson", age: 2, species: "dog"})
 PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Ruby", age: 1, species: "dog"})
+PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Garfield", age: 13, species: "cat"})
+PhoenixFlopPets.Repo.insert!(%PhoenixFlopPets.Pets.Pet{name: "Bob", age: 100, species: "turtle"})
