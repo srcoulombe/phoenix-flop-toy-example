@@ -50,4 +50,10 @@ defmodule PhoenixFlopPetsWeb.PetLive.Index do
 
     {:noreply, stream_delete(socket, :pets, pet)}
   end
+
+  @impl true
+  def handle_event("update-filter", params, socket) do
+    params = Map.delete(params, "_target")
+    {:noreply, push_patch(socket, to: ~p"/pets?#{params}")}
+  end
 end
