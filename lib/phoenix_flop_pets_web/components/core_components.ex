@@ -18,6 +18,7 @@ defmodule PhoenixFlopPetsWeb.CoreComponents do
 
   alias Phoenix.LiveView.JS
   import PhoenixFlopPetsWeb.Gettext
+  import Flop.Phoenix
 
   @doc """
   Renders a modal.
@@ -212,6 +213,37 @@ defmodule PhoenixFlopPetsWeb.CoreComponents do
     """
   end
 
+  attr :fields, :list, required: true
+  attr :meta, Flop.Meta, required: true
+  attr :id, :string, default: nil
+  attr :on_change, :string, default: "update-filter"
+  attr :target, :string, default: nil
+
+  def filter_form(%{meta: meta} = assigns) do
+    assigns = assign(assigns, form: Phoenix.Component.to_form(meta), meta: nil)
+
+    ~H"""
+    <.form
+      for={@form}
+      id={@id}
+      phx-target={@target}
+      phx-submit={@on_change}
+    >
+      <.filter_fields :let={i} form={@form} fields={@fields}>
+        <.input
+          field={i.field}
+          label={i.label}
+          type={i.type}
+          phx-debounce={120}
+          {i.rest}
+        />
+      </.filter_fields>
+
+      <button class="button" phx-click="update-filter" name="submit">search</button>
+    </.form>
+    """
+  end
+
   @doc """
   Renders a button.
 
@@ -362,6 +394,35 @@ defmodule PhoenixFlopPetsWeb.CoreComponents do
         ]}
         {@rest}
       ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
+      <.error :for={msg <- @errors}><%= msg %></.error>
+    </div>
+    """
+  end
+
+  def input(%{type: "checkgroup"} = assigns) do
+    ~H"""
+    <div phx-feedback-for={@name} class="text-sm">
+      <.label for={@id} required={true}><%= @label %></.label>
+      <div>
+        <div class="grid grid-cols-1 gap-1 text-sm items-baseline">
+          <input type="hidden" name={@name} value="" />
+          <div class="" :for={{label, value} <- @options}>
+            <label
+              for={"#{@name}-#{value}"} class="">
+              <input
+                type="checkbox"
+                id={"#{@name}-#{value}"}
+                name={@name}
+                value={value}
+                checked={@value && value in @value}
+                class="mr-2 h-4 w-4 rounded"
+                {@rest}
+              />
+              <%= label %>
+            </label>
+          </div>
+        </div>
+      </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
     """
