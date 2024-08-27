@@ -13,6 +13,7 @@
   row_click={fn {_id, pet} -> JS.navigate(~p"/pets/#{pet}") end}
 >
   <:col :let={{_id, pet}} label="Name"><%= pet.name %></:col>
+  <:col :let={{_id, pet}} label="Species"><%= pet.species %></:col>
   <:col :let={{_id, pet}} label="Age"><%= pet.age %></:col>
   <:action :let={{_id, pet}}>
     <div class="sr-only">
@@ -40,3 +41,34 @@
     patch={~p"/pets"}
   />
 </.modal>
+
+<br />
+
+<h1>Pets</h1>
+
+<.filter_form
+  fields={
+    [
+      name: [label: "Pet name", op: :ilike],
+      species: [
+        type: "checkgroup", 
+        multiple: true,
+        op: :in,
+        options: [{"dog", :dog}, {"cat", :cat}, {"turtle", :turtle}]
+      ]
+    ]
+  }
+  meta={@meta}
+  id="user-filter-form"
+/>
+
+<Flop.Phoenix.table items={@pets} meta={@meta} path={~p"/pets"}>
+  
+  <:col :let={pet} label="Name" field={:name}><%= pet.name %></:col>
+  <:col :let={pet} label="Species" field={:species}><%= pet.species %></:col>
+  <:col :let={pet} label="Age" field={:age}><%= pet.age %></:col>
+
+</Flop.Phoenix.table>
+
+<Flop.Phoenix.pagination meta={@meta} path={~p"/pets"} />
+
