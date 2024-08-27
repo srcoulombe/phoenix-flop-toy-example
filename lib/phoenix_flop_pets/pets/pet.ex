@@ -2,6 +2,12 @@ defmodule PhoenixFlopPets.Pets.Pet do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {
+    Flop.Schema,
+    filterable: [:name, :species],
+    sortable: [:name, :age, :species]
+  }
+
   schema "pets" do
     field :name, :string
     field :age, :integer
@@ -9,12 +15,6 @@ defmodule PhoenixFlopPets.Pets.Pet do
 
     timestamps(type: :utc_datetime)
   end
-
-  @derive {
-    Flop.Schema,
-    filterable: [:name, :species],
-    sortable: [:name, :age, :species]
-  }
 
   @doc false
   def changeset(pet, attrs) do
